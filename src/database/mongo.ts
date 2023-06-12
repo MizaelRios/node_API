@@ -1,4 +1,3 @@
-import { User } from './../models/user';
 import { MongoClient as Mongo, Db } from 'mongodb';
 
 export const MongoClient = {

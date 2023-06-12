@@ -1,8 +1,8 @@
 import { User } from "../../models/user";
-import { HttsResponse } from "../protocols";
+import { HttpResponse } from "../protocols";
 
 export interface IGetUsersController {
-    handle(): Promise<HttsResponse<User[]>>;
+    handle(): Promise<HttpResponse<User[]>>;
 }
 
 export interface IGetUsersRepository {
