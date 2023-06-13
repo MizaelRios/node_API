@@ -3,8 +3,8 @@ import { GetUsersController } from './controllers/get-users/get-users';
 import express from 'express';
 import { config } from 'dotenv';
 import { MongoClient } from './database/mongo';
-import { MongoCreateUserRepository } from './repositories/create-users/mongo-create-users';
-import { CreateUserController } from './controllers/create-users/create-users';
+import { MongoCreateUserRepository } from './repositories/create-user/mongo-create-user';
+import { CreateUserController } from './controllers/create-users/create-user';
 
 const main = async () => {
 
@@ -19,7 +19,7 @@ const main = async () => {
         const getUsersController = new GetUsersController(mongoGetUsersRepository);
         const { body, statusCode } = await getUsersController.handle();
 
-        res.send(body).status(statusCode);
+        res.status(statusCode).send(body);
     });
 
     app.post("/users", async (req, res) => {
@@ -27,7 +27,7 @@ const main = async () => {
         const createUserController = new CreateUserController(mongoCreateUserRepository);
         const { body, statusCode } = await createUserController.handle({ body: req.body });
 
-        res.send(body).status(statusCode);
+        res.status(statusCode).send(body);
     });
 
     const port = process.env.PORT || 8000;
