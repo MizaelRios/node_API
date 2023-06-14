@@ -1,18 +1,18 @@
 import { User } from "../../models/user";
 import { HttpRequest, HttpResponse } from "../protocols";
-import { CreateUsersParams, ICreateUserController, ICreateUserRepository } from "./protocols";
+import { CreateUserParams, ICreateUserController, ICreateUserRepository } from "./protocols";
 import validator from "validator";
 
 export class CreateUserController implements ICreateUserController {
     constructor(private readonly createUserRepository: ICreateUserRepository) { }
 
-    async handle(httpRequest: HttpRequest<CreateUsersParams>): Promise<HttpResponse<User>> {
+    async handle(httpRequest: HttpRequest<CreateUserParams>): Promise<HttpResponse<User>> {
         try {
 
             const requiredFields = ["firstName", "lastName", "email", "password"];
 
             for (const field of requiredFields) {
-                if (!httpRequest?.body?.[field as keyof CreateUsersParams]?.length) {
+                if (!httpRequest?.body?.[field as keyof CreateUserParams]?.length) {
                     return {
                         statusCode: 400,
                         body: `Field ${field} is required`
